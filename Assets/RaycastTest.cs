@@ -5,22 +5,26 @@ using UnityEngine;
 
 public class RaycastTest : MonoBehaviour
 {
- 
+    RaycastHit[] hits;
+
     void Update()
     {
-        FireRay();
+        if(Input.GetMouseButtonDown(0))
+        {
+            FireRay();
+        }
     }
 
     void FireRay()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-      //  Debug.DrawRay(ray.origin, ray.direction * 20, Color.red);
+        Debug.DrawRay(ray.origin, ray.direction * 20, Color.red);
 
-        RaycastHit hitData;
+        hits = Physics.RaycastAll(ray);
 
-        if(Physics.Raycast(ray, out hitData))
+        foreach(RaycastHit hit in hits)
         {
-            
+            Destroy(hit.collider.gameObject);
         }
     }
 }
