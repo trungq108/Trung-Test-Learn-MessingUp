@@ -2,29 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using UnityEngine;
+using System;
 
 public class RaycastTest : MonoBehaviour
 {
-    RaycastHit[] hits;
+    Rigidbody rb;
 
-    void Update()
+    private void Awake()
     {
-        if(Input.GetMouseButtonDown(0))
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate()
+    {
+        Ray ray = new Ray(transform.position, Vector3.down);
+        Debug.DrawRay(ray.origin, ray.direction * 5, Color.yellow);
+
+        if(Physics.Raycast(ray, 5))
         {
-            FireRay();
+            FloatUp();
         }
     }
 
-    void FireRay()
+    void FloatUp()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Debug.DrawRay(ray.origin, ray.direction * 20, Color.red);
-
-        hits = Physics.RaycastAll(ray);
-
-        foreach(RaycastHit hit in hits)
-        {
-            Destroy(hit.collider.gameObject);
-        }
+        rb.AddForce(Vector3.up * 20);
     }
 }
