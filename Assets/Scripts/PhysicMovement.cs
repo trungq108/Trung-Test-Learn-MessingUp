@@ -5,23 +5,32 @@ using UnityEngine;
 public class PhysicMovement : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] float speed;
+    [SerializeField] float strength;
+    float rotX;
+    float rotY;
+    bool isRotate;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        Move();
+        if (Input.GetMouseButton(0))
+        {
+            isRotate = true;
+            rotX = Input.GetAxis("Mouse X") * strength;
+            rotY = Input.GetAxis("Mouse Y") * strength;
+        }
+        else { isRotate = false; }
     }
 
-    void Move()
+    private void FixedUpdate()
     {
-        Vector3 moveAxis = new Vector3 (Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        moveAxis = Vector3.ClampMagnitude(moveAxis, 1);
-
-        rb.MovePosition(rb.position + moveAxis * speed * Time.fixedDeltaTime);
+        if(isRotate)
+        {
+            rb.AddTorque(rotY, -rotX, 0);
+        }
     }
 }
