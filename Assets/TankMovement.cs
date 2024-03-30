@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class TankMovement : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    WaitForSeconds delay = new WaitForSeconds(1);
+
+    private void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            StartCoroutine(Move());
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator Move()
     {
-        
+        print("Start waiting");
+
+        yield return new WaitForSeconds(1);
+
+        print("5 seconds has passed");
     }
 }
