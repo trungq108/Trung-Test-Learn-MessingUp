@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class TankMovement : MonoBehaviour
 {
-    WaitForSeconds delay = new WaitForSeconds(1);
-
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(Move());
+            StartCoroutine(MyCoroutine());
         }
     }
 
-    IEnumerator Move()
+    IEnumerator MyCoroutine()
     {
-        print("Start waiting");
+        print("Ok here we go!");
+        yield return StartCoroutine(MyOtherCoroutine());
+        print("Ok we are so DONE !");
+    }
 
-        yield return new WaitForSeconds(1);
-
-        print("5 seconds has passed");
+    IEnumerator MyOtherCoroutine()
+    {
+        int i = 5;
+        while (i > 0)
+        {
+            print(i);
+            i--;
+            yield return new WaitForSeconds(1);
+        }
+        print("All done BAE :)) ");
     }
 }
