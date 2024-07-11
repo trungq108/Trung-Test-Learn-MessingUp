@@ -3,18 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - GameManager
-  - Gold
-  - DeathPlane
-  - CharacterSelectController
-  - UIManager
-  - Plane
-  - Camera
-  - ClassifiedArea
-  - Recycling
-  - MainModel
-  - Trash
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -24,10 +13,10 @@ TagManager:
   - UI
   - 
   - 
-  - Plane
-  - CharacterSelectionUI
+  - PostProcessing
   - 
-  - 
+  - FirstPersonWeapon
+  - PhysicalAmmo
   - 
   - 
   - 
@@ -49,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 788040023
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 3922283465
     locked: 0
