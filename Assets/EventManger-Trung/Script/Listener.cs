@@ -6,12 +6,12 @@ public class Listener : MonoBehaviour
 {
     private void OnEnable()
     {
-        EventManager.Instance.AddListener<BoxColorEvent>(ColorHandler);
+        EventManager.AddListener<BoxColorEvent>(ColorHandler);
     }
 
     private void OnDisable()
     {
-        EventManager.Instance.RemoveListener<BoxColorEvent>(ColorHandler);
+        EventManager.RemoveListener<BoxColorEvent>(ColorHandler);
     }
 
     private void ColorHandler(BoxColorEvent e)

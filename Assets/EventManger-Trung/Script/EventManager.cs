@@ -4,26 +4,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EventManager : MonoBehaviour
+public static class EventManager
 {
-    public static EventManager Instance { get; private set; }
-    private Dictionary<Type, List<Action<object>>> eventHandlers;
+    private static Dictionary<Type, List<Action<object>>> eventHandlers = new Dictionary<Type, List<Action<object>>>();
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        eventHandlers = new Dictionary<Type, List<Action<object>>>();
-    }
-
-    public void AddListener<T>(Action<T> handler)
+    public static void AddListener<T>(Action<T> handler)
     {
         Type eventType = typeof(T);
         if (!eventHandlers.ContainsKey(eventType))
@@ -33,7 +18,7 @@ public class EventManager : MonoBehaviour
         eventHandlers[eventType].Add((e) => handler((T)e));
     }
 
-    public void RemoveListener<T>(Action<T> handler)
+    public static void RemoveListener<T>(Action<T> handler)
     {
         Type eventType = typeof(T);
         if (eventHandlers.ContainsKey(eventType))
@@ -46,7 +31,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public void TriggerEvent<T>(T eventData)
+    public static void TriggerEvent<T>(T eventData)
     {
         Type eventType = typeof(T);
         if (eventHandlers.ContainsKey(eventType))
@@ -59,20 +44,20 @@ public class EventManager : MonoBehaviour
     }
 }
 
-// eventType
 
+// eventType
 public class PlayerScoredEvent
 {
-    public int PlayerID { get; set; }
-    public int Score { get; set; }
+    public int PlayerID;
+    public int Score;
 }
 
 public class GameOverEvent
 {
-    public string Winner { get; set; }
+    public string Winner;
 }
 
 public class BoxColorEvent
 {
-    public Material Material { get; set; }
+    public Material Material;
 }

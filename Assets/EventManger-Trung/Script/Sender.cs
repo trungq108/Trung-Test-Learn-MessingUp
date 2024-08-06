@@ -8,7 +8,7 @@ public class Sender : MonoBehaviour
     {
         BoxColorEvent e = new BoxColorEvent();
         e.Material = this.GetComponent<MeshRenderer>().material;
-        EventManager.Instance.TriggerEvent(e);
+        EventManager.TriggerEvent(e);
         Debug.Log("Sender"); 
     }
 }
